@@ -153,7 +153,13 @@ void read_xyz(int &N_rods, triplet &L, particle *&particle_list, string filename
   getline(inFile, line); //read parameter line
   istringstream paramsline(line);
   paramsline >> dummy;
-  L[0] = stod(dummy.replace(0, 9, ""));
+  try {
+    L[0] = stod(dummy.replace(0, 9, ""));
+  }catch(std::invalid_argument){
+    //catch cases where there may be a space before the first lattice vector
+    paramsline >> dummy;
+    L[0] = stod(dummy);
+  }
   paramsline >> dummy3 >> L[1];
   paramsline >> dummy3 >> dummy;
   L[2] = stod(dummy.replace(dummy.length() - 1, 1, ""));
