@@ -4,6 +4,7 @@
 #include<sstream>
 #include<string>
 #include<iomanip> // for movie output manipulation
+#include<regex>
 #include"MGA_Interaction.h"
 using std::string;
 
@@ -146,6 +147,7 @@ void read_xyz(int &N_rods, triplet &L, particle *&particle_list, string filename
   string dummy;
   triplet dummy3;
   string line;
+  string temp_type;
 
   getline(inFile, line);
   N_rods = stoi(line);
@@ -166,7 +168,8 @@ void read_xyz(int &N_rods, triplet &L, particle *&particle_list, string filename
 
   particle_list = new particle[N_rods];
   for (int k = 0; k < N_rods; k++) {
-    inFile >> particle_list[k].coords >> particle_list[k].dir >> dummy >> particle_list[k].type;
+    inFile >> particle_list[k].coords >> particle_list[k].dir >> dummy >> temp_type;
+    particle_list[k].type = stoi(std::regex_replace(temp_type,std::regex(R"([\D])"),""));
     particle_list[k].coords = particle_list[k].coords + L / 2;
     particle_list[k].dir = z_rotation_quaternion_to_vector(particle_list[k].dir);
     getline(inFile, line);  // skip rest of line
