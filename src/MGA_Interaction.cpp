@@ -176,3 +176,41 @@ void read_xyz(int &N_rods, triplet &L, particle *&particle_list, string filename
   }
   inFile.close();
 }
+
+void write_spheres_xyz(particle *& particle_list,triplet &L,const int N_rods,string fname){ // copied From Main program, modified to change particle type to cluster #
+  // Outputs the current configuration in a format that can be read by Ovito
+	// open the movie file for writing to
+  ofstream output_movie;  	// File containing data for VMD movie
+	output_movie.open(fname.c_str(),ios::out);
+  int spheres_per_rod=20;
+  int attractive = 15;
+  double length=5;
+  double sphere_spacing = length/spheres_per_rod;
+  int s_type;
+	// Generate output in gbmega format
+	// Output number of rods
+  //	output_movie << N_total << endl;
+	output_movie << N_rods * spheres_per_rod << "\n";
+	// Output box side lengths
+	output_movie << "Lattice=\"" << L[0] << " 0 0 0 " << L[1] << " 0 0 0 " << L[2] 
+  << "\" cell_origin=\"" << L[0]/-2 << " " << L[1]/-2 << " " << L[2]/-2 << "\" "
+  << "properties=pos:R:3:id:I:1:type:I:1 orientation is from quaternion Q(0,v2) such that zQ=v, the real direction\n";
+  
+  //	output_movie.precision(dl::digits10);  // Set coord output to max precision to avoid numerical errors when restarting from old coords
+	output_movie.precision(7);
+
+	// Output the coordinates and orientation of each rod
+	for (int i=0;i<N_rods;i++)
+	{
+		for (int j=0;j<spheres_per_rod;j++){
+    if (j < attractive){
+      s_type = particle_list[i].type;
+    }else{
+      s_type = 0;
+    }
+		output_movie << (particle_list[i].coords - L/2 - particle_list[i].dir * (-length/2. + sphere_spacing*j)) << " " << i+1 << " " << s_type << "\n";
+    }
+	}
+	// close movie file
+	output_movie.close();
+}

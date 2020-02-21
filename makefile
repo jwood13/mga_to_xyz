@@ -24,6 +24,8 @@ mga_conversion: mga_conversion.cpp
 	$(CC) $(CFLAGS) mga_conversion.cpp $(OBJ) -o $(BINPATH)/mga_conversion.out
 mga_conversiondebug: mga_conversion_debug
 	$(CC) $(DFLAGS) mga_conversion.cpp $(OBJ) -o $(BINPATH)/mga_conversion_debug.out
+sphere: xyz_sphere_conversion.cpp
+	$(CC) $(CFLAGS) xyz_sphere_conversion.cpp $(OBJ) -o $(BINPATH)/xyz_sphere_conversion.out
 # running "make clean" should delete all the object files (but NOT SOURCE FILES)
 # this is used when you want to rebuild everything
 clean:
