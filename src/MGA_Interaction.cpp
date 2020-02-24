@@ -208,7 +208,7 @@ void write_spheres_xyz(particle *& particle_list,triplet &L,const int N_rods,str
     }else{
       s_type = 0;
     }
-		output_movie << (particle_list[i].coords - L/2 - particle_list[i].dir * (-length/2. + sphere_spacing*j)) << " " << i+1 << " " << s_type << "\n";
+		output_movie << (particle_list[i].coords - L/2 + particle_list[i].dir * (-length/2. + sphere_spacing*j)) << " " << i+1 << " " << s_type << "\n";
     }
 	}
 	// close movie file
