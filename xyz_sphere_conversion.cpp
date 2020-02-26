@@ -7,7 +7,11 @@ int read_mga_write_xyz(string filename) {
   particle* particle_list;  // The particle list
   int N_rods;
   triplet L;
-  read_mga(N_rods, L, particle_list, filename);
+  if (filename.substr(filename.size()-4) != ".xyz") {
+    read_mga(N_rods, L, particle_list, filename);
+  }else{
+    read_xyz(N_rods, L, particle_list, filename);
+  }
   write_spheres_xyz(particle_list, L, N_rods, filename.append("s.xyz"));
 }
 
