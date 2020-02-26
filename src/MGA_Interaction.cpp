@@ -177,14 +177,14 @@ void read_xyz(int &N_rods, triplet &L, particle *&particle_list, string filename
   inFile.close();
 }
 
-void write_spheres_xyz(particle *& particle_list,triplet &L,const int N_rods,string fname){ // copied From Main program, modified to change particle type to cluster #
+void write_spheres_xyz(particle *& particle_list,triplet &L, const int N_rods, string fname, const int attractive_spheres = 15, const int spheres_per_rod = 20, const double length = 5){ // copied From Main program, modified to change particle type to cluster #
   // Outputs the current configuration in a format that can be read by Ovito
 	// open the movie file for writing to
   ofstream output_movie;  	// File containing data for VMD movie
 	output_movie.open(fname.c_str(),ios::out);
-  int spheres_per_rod=20;
-  int attractive = 15;
-  double length=5;
+  // int spheres_per_rod=20;
+  // int attractive_spheres = 15;
+  // double length=5;
   double sphere_spacing = length/spheres_per_rod;
   int s_type;
 	// Generate output in gbmega format
@@ -203,7 +203,7 @@ void write_spheres_xyz(particle *& particle_list,triplet &L,const int N_rods,str
 	for (int i=0;i<N_rods;i++)
 	{
 		for (int j=0;j<spheres_per_rod;j++){
-    if (j < attractive){
+    if (j < attractive_spheres){
       s_type = particle_list[i].type;
     }else{
       s_type = 0;

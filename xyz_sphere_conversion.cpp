@@ -3,7 +3,7 @@
 #include "src/MGA_Interaction.cpp"
 #include "src/MGA_Interaction.h"
 
-int read_mga_write_xyz(string filename) {
+int read_and_write_spheres(string filename, const int attractive_spheres = 15, const int spheres_per_rod = 20, const double length = 5) {
   particle* particle_list;  // The particle list
   int N_rods;
   triplet L;
@@ -12,16 +12,15 @@ int read_mga_write_xyz(string filename) {
   }else{
     read_xyz(N_rods, L, particle_list, filename);
   }
-  write_spheres_xyz(particle_list, L, N_rods, filename.append("s.xyz"));
+  write_spheres_xyz(particle_list, L, N_rods, filename.append("s.xyz"), attractive_spheres, spheres_per_rod, length);
 }
 
 int main(int argc, char* argv[]) {
   if (argc == 1) {
-    // feed in the first argument as the random seed to allow easy
-    // control of the seed without putting it in the params file
+
     std::cout << "Needs an Input" << endl;
     return 1;
   } else {
-    return read_mga_write_xyz(argv[1]);
+    return read_and_write_spheres(argv[1]);
   }
 }
