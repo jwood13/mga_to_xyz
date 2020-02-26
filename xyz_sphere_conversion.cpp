@@ -16,11 +16,23 @@ int read_and_write_spheres(string filename, const int attractive_spheres = 15, c
 }
 
 int main(int argc, char* argv[]) {
+  int attractive_spheres = 15;
+  int spheres_per_rod = 20;
+  double length = 5;
   if (argc == 1) {
 
     std::cout << "Needs an Input" << endl;
     return 1;
   } else {
-    return read_and_write_spheres(argv[1]);
+    if (argc > 1){
+      attractive_spheres = std::stoi(argv[2]);
+      if (argc > 2){
+        spheres_per_rod = std::stoi(argv[3]);
+        if (argc > 3){
+          length = std::stod(argv[4]);
+        }
+      }
+    }
+    return read_and_write_spheres(argv[1],attractive_spheres, spheres_per_rod, length);
   }
 }
