@@ -12,7 +12,7 @@ BINPATH = .
 OBJ = 
 
 # default target
-all: xyz_conversion mga_conversion
+all: xyz_conversion mga_conversion sphere
 
 # do all the linking and make the executible
 
