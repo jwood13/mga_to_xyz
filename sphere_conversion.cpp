@@ -24,11 +24,11 @@ int main(int argc, char* argv[]) {
     std::cout << "Needs an Input" << endl;
     return 1;
   } else {
-    if (argc > 1){
+    if (argc > 2){
       attractive_spheres = std::stoi(argv[2]);
-      if (argc > 2){
+      if (argc > 3){
         spheres_per_rod = std::stoi(argv[3]);
-        if (argc > 3){
+        if (argc > 4){
           length = std::stod(argv[4]);
         }
       }

@@ -194,7 +194,7 @@ void write_spheres_xyz(particle *& particle_list,triplet &L, const int N_rods, s
 	// Output box side lengths
 	output_movie << "Lattice=\"" << L[0] << " 0 0 0 " << L[1] << " 0 0 0 " << L[2] 
   << "\" cell_origin=\"" << L[0]/-2 << " " << L[1]/-2 << " " << L[2]/-2 << "\" "
-  << "properties=pos:R:3:id:I:1:type:I:1 orientation is from quaternion Q(0,v2) such that zQ=v, the real direction\n";
+  << "properties=pos:R:3:id:I:1:type:I:1\n";
   
   //	output_movie.precision(dl::digits10);  // Set coord output to max precision to avoid numerical errors when restarting from old coords
 	output_movie.precision(7);
