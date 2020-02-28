@@ -26,6 +26,8 @@ mga_conversiondebug: mga_conversion_debug
 	$(CC) $(DFLAGS) mga_conversion.cpp $(OBJ) -o $(BINPATH)/mga_conversion_debug.out
 sphere: sphere_conversion.cpp
 	$(CC) $(CFLAGS) sphere_conversion.cpp $(OBJ) -o $(BINPATH)/sphere_conversion.out
+jsmol_sphere_conversion.out: jsmol_sphere_conversion.cpp src/MGA_Interaction.cpp
+	$(CC) $(CFLAGS) jsmol_sphere_conversion.cpp $(OBJ) -o $(BINPATH)/jsmol_sphere_conversion.out
 # running "make clean" should delete all the object files (but NOT SOURCE FILES)
 # this is used when you want to rebuild everything
 clean:
