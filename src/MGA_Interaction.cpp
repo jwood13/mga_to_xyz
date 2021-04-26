@@ -203,10 +203,12 @@ void write_spheres_xyz(particle *& particle_list,triplet &L, const int N_rods, s
 	for (int i=0;i<N_rods;i++)
 	{
 		for (int j=0;j<spheres_per_rod;j++){
-    if (j < attractive_spheres){
+    if (j == spheres_per_rod - 1){
       s_type = particle_list[i].type;
+    }else if (j > spheres_per_rod - attractive_spheres - 1) {
+      s_type = 4;
     }else{
-      s_type = 0;
+      s_type = 1;
     }
 		output_movie << (particle_list[i].coords - L/2 + particle_list[i].dir * (-length/2. + sphere_spacing*j)) << " " << i+1 << " " << s_type << "\n";
     }
